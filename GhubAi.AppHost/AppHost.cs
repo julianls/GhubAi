@@ -7,12 +7,12 @@ var registry = builder.AddProject<Projects.GhubAiHubRegistry>("registry")
     .WithExternalHttpEndpoints();
 
 var hub = builder.AddProject<Projects.GhubAiHub>("hub")
-    .WithReference(registry)
     .WithHttpHealthCheck("/health")
     .WithExternalHttpEndpoints();
 
 var proxy = builder.AddProject<Projects.GhubAiClientProxy>("proxy")
     .WithReference(hub)
+    .WithReference(registry)
     .WithHttpHealthCheck("/health")
     .WithExternalHttpEndpoints()
     .WaitFor(hub);

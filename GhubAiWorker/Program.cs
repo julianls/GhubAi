@@ -2,11 +2,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-var host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices((ctx, services) =>
-    {
-        services.AddHostedService<ProviderWorker>();
-    })
-    .Build();
+var builder = Host.CreateApplicationBuilder(args);
+
+// Add Aspire service defaults (OpenTelemetry, health checks, service discovery)
+builder.AddServiceDefaults();
+
+builder.Services.AddHostedService<ProviderWorker>();
+
+var host = builder.Build();
 
 await host.RunAsync();
