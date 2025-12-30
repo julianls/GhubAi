@@ -1,0 +1,18 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+
+  <ItemGroup>
+    <ProjectReference Include="..\GhubAiClientProxy\GhubAiClientProxy.csproj" />
+    <ProjectReference Include="..\GhubAiHub\GhubAiHub.csproj" />
+    <ProjectReference Include="..\GhubAiHubRegistry\GhubAiHubRegistry.csproj" />
+    <ProjectReference Include="..\GhubAiWorker\GhubAiWorker.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>5a680823-d1aa-41f3-8ba5-539bec4cf046</UserSecretsId>
+  </PropertyGroup>
+
+</Project>

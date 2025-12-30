@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GhubAiHub.Controllers;
 
-[Route("api/[controller]")]
+[Route("api")]
 [ApiController]
 public class RegistryController : ControllerBase
 {

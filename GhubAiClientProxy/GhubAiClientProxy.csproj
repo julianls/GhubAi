@@ -15,4 +15,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GhubAi.ServiceDefaults\GhubAi.ServiceDefaults.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,6 @@
 <Solution>
+  <Project Path="GhubAi.AppHost/GhubAi.AppHost.csproj" />
+  <Project Path="GhubAi.ServiceDefaults/GhubAi.ServiceDefaults.csproj" />
   <Project Path="GhubAiClientProxy/GhubAiClientProxy.csproj" />
   <Project Path="GhubAiHub/GhubAiHub.csproj" />
   <Project Path="GhubAiHubRegistry/GhubAiHubRegistry.csproj" />

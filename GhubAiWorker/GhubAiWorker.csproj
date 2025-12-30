@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GhubAiShared\GhubAiShared.csproj" />
+    <ProjectReference Include="..\GhubAi.ServiceDefaults\GhubAi.ServiceDefaults.csproj" />
   </ItemGroup>
 	
 </Project>

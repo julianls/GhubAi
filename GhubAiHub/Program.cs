@@ -34,4 +34,7 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapHub<GhubAiHub.Hubs.GridHub>("/gridhub");
 
+// Health check endpoint
+app.MapGet("/health", () => Results.Ok(new { status = "healthy" }));
+
 app.Run();

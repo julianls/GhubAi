@@ -1,6 +1,82 @@
-@GhubAiClientProxy_HostAddress = http://localhost:5197
+@GhubAiProxy_HostAddress = http://localhost:5197
 
-GET {{GhubAiClientProxy_HostAddress}}/weatherforecast/
+### Get aggregated models (OpenAI-style)
+GET {{GhubAiProxy_HostAddress}}/v1/models
 Accept: application/json
+
+###
+
+### OpenAI-style chat completions (streaming)
+POST {{GhubAiProxy_HostAddress}}/v1/chat/completions
+Content-Type: application/json
+Accept: text/event-stream
+
+{
+  "model": "llama3.2:latest",
+  "messages": [
+    { "role": "user", "content": "Say hello and identify your model." }
+  ]
+}
+
+### OpenAI-style chat completions (streaming ON)
+POST {{GhubAiProxy_HostAddress}}/v1/chat/completions
+Content-Type: application/json
+Accept: text/event-stream
+
+{
+  "model": "llama3.2:latest",
+  "messages": [
+    { "role": "user", "content": "Say hello and identify your model." }
+  ],
+  "max_completion_tokens":2500,
+  "stream":true,
+  "stream_options":{"include_usage":true}
+}
+
+###
+
+### OpenAI-style chat completions tools (streaming)
+POST {{GhubAiProxy_HostAddress}}/v1/chat/completions
+Content-Type: application/json
+Accept: text/event-stream
+
+{
+  "model": "llama3.2:latest",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant."
+    },
+    {
+      "role": "user",
+      "content": "What's the weather like in Tokyo and Paris right now?"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_weather",
+        "description": "Get the current weather for a specific location",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "The city and state, e.g. San Francisco, CA"
+            },
+            "unit": {
+              "type": "string",
+              "enum": ["celsius", "fahrenheit"]
+            }
+          },
+          "required": ["location"]
+        }
+      }
+    }
+  ],
+  "tool_choice": "auto"
+}
 
 ###
