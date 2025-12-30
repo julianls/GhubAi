@@ -1,6 +1,177 @@
 @GhubAiHub_HostAddress = http://localhost:5203
+@Ollama_HostAddress = http://localhost:11434
 
-GET {{GhubAiHub_HostAddress}}/weatherforecast/
+### Get Ollama-style tags (list available models)
+GET {{GhubAiHub_HostAddress}}/api/tags
 Accept: application/json
 
+###
+
+### Get detailed registry information (nodes)
+GET {{GhubAiHub_HostAddress}}/api/registry
+Accept: application/json
+
+###
+
+### Get aggregated models (OpenAI-style)
+GET {{GhubAiHub_HostAddress}}/v1/models
+Accept: application/json
+
+###
+
+### Get aggregated models (OpenAI-style)
+GET {{Ollama_HostAddress}}/v1/models
+Accept: application/json
+
+###
+
+### OpenAI-style chat completions (streaming)
+POST {{GhubAiHub_HostAddress}}/v1/chat/completions
+Content-Type: application/json
+Accept: text/event-stream
+
+{
+  "model": "llama3.2:latest",
+  "messages": [
+    { "role": "user", "content": "Say hello and identify your model." }
+  ]
+}
+
+
+### OpenAI-style chat completions (streaming)
+POST {{Ollama_HostAddress}}/v1/chat/completions
+Content-Type: application/json
+Accept: text/event-stream
+
+{
+  "model": "llama3.2:latest",
+  "messages": [
+    { "role": "user", "content": "Say hello and identify your model." }
+  ]
+}
+
+### OpenAI-style chat completions (streaming ON)
+POST {{GhubAiHub_HostAddress}}/v1/chat/completions
+Content-Type: application/json
+Accept: text/event-stream
+
+{
+  "model": "llama3.2:latest",
+  "messages": [
+    { "role": "user", "content": "Say hello and identify your model." }
+  ],
+  "max_completion_tokens":2500,
+  "stream":true,
+  "stream_options":{"include_usage":true}
+}
+
+### OpenAI-style chat completions ollama (streaming)
+POST {{Ollama_HostAddress}}/v1/chat/completions
+Content-Type: application/json
+Accept: text/event-stream
+
+{
+  "model": "llama3.2:latest",
+  "messages": [
+    { "role": "user", "content": "Say hello and identify your model." }
+  ],
+  "max_completion_tokens":2500,
+  "stream":true,
+  "stream_options":{"include_usage":true}
+}
+
+###
+
+### Example: send a request with curl to the chat endpoint (non-streaming)
+# curl -X POST "{{GhubAiHub_HostAddress}}/api/chat" -H "Content-Type: application/json" -d '{"model":"llama3","prompt":"Hello"}'
+
+
+### OpenAI-style chat completions ollama (streaming)
+POST {{GhubAiHub_HostAddress}}/v1/chat/completions
+Content-Type: application/json
+Accept: text/event-stream
+
+{
+  "model": "llama3.2:latest",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant."
+    },
+    {
+      "role": "user",
+      "content": "What's the weather like in Tokyo and Paris right now?"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_weather",
+        "description": "Get the current weather for a specific location",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "The city and state, e.g. San Francisco, CA"
+            },
+            "unit": {
+              "type": "string",
+              "enum": ["celsius", "fahrenheit"]
+            }
+          },
+          "required": ["location"]
+        }
+      }
+    }
+  ],
+  "tool_choice": "auto"
+}
+###
+
+### OpenAI-style chat completions ollama (streaming)
+POST {{Ollama_HostAddress}}/v1/chat/completions
+Content-Type: application/json
+Accept: text/event-stream
+
+{
+  "model": "llama3.2:latest",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant."
+    },
+    {
+      "role": "user",
+      "content": "What's the weather like in Tokyo and Paris right now?"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_weather",
+        "description": "Get the current weather for a specific location",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "The city and state, e.g. San Francisco, CA"
+            },
+            "unit": {
+              "type": "string",
+              "enum": ["celsius", "fahrenheit"]
+            }
+          },
+          "required": ["location"]
+        }
+      }
+    }
+  ],
+  "tool_choice": "auto"
+}
 ###
