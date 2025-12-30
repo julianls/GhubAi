@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="GhubAiClientProxy/GhubAiClientProxy.csproj" />
+  <Project Path="GhubAiHub/GhubAiHub.csproj" />
+  <Project Path="GhubAiHubRegistry/GhubAiHubRegistry.csproj" />
+  <Project Path="GhubAiShared/GhubAiShared.csproj" />
+  <Project Path="GhubAiWorker/GhubAiWorker.csproj" />
+</Solution>

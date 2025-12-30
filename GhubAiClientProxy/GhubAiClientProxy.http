@@ -1,0 +1,6 @@
+@GhubAiClientProxy_HostAddress = http://localhost:5197
+
+GET {{GhubAiClientProxy_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
