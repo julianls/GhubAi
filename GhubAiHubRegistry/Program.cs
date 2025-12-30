@@ -26,7 +26,4 @@ app.MapControllers();
 // Map default endpoints (health checks)
 app.MapDefaultEndpoints();
 
-// Health check endpoint
-app.MapGet("/health", () => Results.Ok(new { status = "healthy" }));
-
 app.Run();
