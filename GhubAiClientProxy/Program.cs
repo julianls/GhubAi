@@ -2,6 +2,10 @@ using GhubAiClientProxy.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Enable Windows Service and Linux Systemd support
+builder.Host.UseWindowsService();
+builder.Host.UseSystemd();
+
 // Add Aspire service defaults (OpenTelemetry, health checks, service discovery)
 builder.AddServiceDefaults();
 
